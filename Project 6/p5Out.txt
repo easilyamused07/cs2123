@@ -1,0 +1,219 @@
+ROOT Q1
+TEXT Q Q1 Pain?
+* Define the left side of the tree
+NODE Q Q2 Q1 N
+TEXT Q Q2 Cough?
+NODE Q Q3 Q2 N
+TEXT Q Q3 Fever?
+NODE D D1 Q2 Y
+TEXT D D1 Treat common cold
+NODE D D2 Q3 Y
+TEXT D D2 Treat Flu
+NODE D D3 Q3 N
+TEXT D D3 Thank you for visiting
+PRINT
+
+	Q Q1 Pain?
+
+			D D1 Treat common cold
+
+		Q Q2 Cough?
+
+				D D2 Treat Flu
+
+			Q Q3 Fever?
+
+				D D3 Thank you for visiting
+* Define the right side of the tree
+NODE Q Q5 Q1 Y
+TEXT Q Q5 Tenderness in abdomen?
+NODE Q Q6 Q5 N
+TEXT Q Q6 Pain in Throat?
+NODE Q Q7 Q6 N
+TEXT Q Q7 Fever?
+NODE D D5 Q7 N
+TEXT D D5 Prescribe Acetaminophen
+NODE D D6 Q7 Y
+TEXT D D6 Treat Flu
+NODE D D7 Q6 Y
+TEXT D D7 Administer Strep Test
+NODE Q Q8 Q5 Y
+TEXT Q Q8 X-ray shows stones?
+NODE D D8 Q8 N
+TEXT D D8 Schedule Appendectomy
+NODE D D9 Q8 Y 
+TEXT D D9 Treat kidney stones
+PRINT
+
+				D D9 Treat kidney stones
+
+			Q Q8 X-ray shows stones?
+
+				D D8 Schedule Appendectomy
+
+		Q Q5 Tenderness in abdomen?
+
+				D D7 Administer Strep Test
+
+			Q Q6 Pain in Throat?
+
+					D D6 Treat Flu
+
+				Q Q7 Fever?
+
+					D D5 Prescribe Acetaminophen
+
+	Q Q1 Pain?
+
+			D D1 Treat common cold
+
+		Q Q2 Cough?
+
+				D D2 Treat Flu
+
+			Q Q3 Fever?
+
+				D D3 Thank you for visiting
+* Try the HELP function
+HELP YYYYYYY
+Q Q1 Pain?
+Q Q5 Tenderness in abdomen?
+Q Q8 X-ray shows stones?
+D D9 Treat kidney stones
+	*** Warning:  NULL returned from HELP
+HELP NNNNNNN
+Q Q1 Pain?
+Q Q2 Cough?
+Q Q3 Fever?
+D D3 Thank you for visiting
+	*** Warning:  NULL returned from HELP
+HELP YNYNYNYN
+Q Q1 Pain?
+Q Q5 Tenderness in abdomen?
+Q Q6 Pain in Throat?
+D D7 Administer Strep Test
+	*** Warning:  NULL returned from HELP
+HELP NYNYNYNY
+Q Q1 Pain?
+Q Q2 Cough?
+D D1 Treat common cold
+	*** Warning:  NULL returned from HELP
+* Try some warning cases for the NODE command
+NODE D D10 Q9 Y
+***Warning parent not found!****
+TEXT D D10 Oh no!!!!
+NODE Q Q8 Q5 Y
+PRINT
+
+			Q Q8 X-ray shows stones?
+
+		Q Q5 Tenderness in abdomen?
+
+				D D7 Administer Strep Test
+
+			Q Q6 Pain in Throat?
+
+					D D6 Treat Flu
+
+				Q Q7 Fever?
+
+					D D5 Prescribe Acetaminophen
+
+	Q Q1 Pain?
+
+			D D1 Treat common cold
+
+		Q Q2 Cough?
+
+				D D2 Treat Flu
+
+			Q Q3 Fever?
+
+				D D3 Thank you for visiting
+* Delete Q3 from the tree
+DELETE Q3
+PRINT
+
+			Q Q8 X-ray shows stones?
+
+		Q Q5 Tenderness in abdomen?
+
+				D D7 Administer Strep Test
+
+			Q Q6 Pain in Throat?
+
+					D D6 Treat Flu
+
+				Q Q7 Fever?
+
+					D D5 Prescribe Acetaminophen
+
+	Q Q1 Pain?
+
+			D D1 Treat common cold
+
+		Q Q2 Cough?
+
+			À בÑש·פ¯רצÿ *** unknown text id
+NODE D D5 Q2 N
+PRINT
+
+			Q Q8 X-ray shows stones?
+
+		Q Q5 Tenderness in abdomen?
+
+				D D7 Administer Strep Test
+
+			Q Q6 Pain in Throat?
+
+					D D6 Treat Flu
+
+				Q Q7 Fever?
+
+					D D5 Prescribe Acetaminophen
+
+	Q Q1 Pain?
+
+			D D1 Treat common cold
+
+		Q Q2 Cough?
+
+			D D5 Prescribe Acetaminophen
+HELP NNNNNNN
+Q Q1 Pain?
+Q Q2 Cough?
+D D5 Prescribe Acetaminophen
+	*** Warning:  NULL returned from HELP
+* Actually give Q2 a new N
+NODE D D11 Q2 N
+TEXT D D11 Time to party
+PRINT
+
+			Q Q8 X-ray shows stones?
+
+		Q Q5 Tenderness in abdomen?
+
+				D D7 Administer Strep Test
+
+			Q Q6 Pain in Throat?
+
+					D D6 Treat Flu
+
+				Q Q7 Fever?
+
+					D D5 Prescribe Acetaminophen
+
+	Q Q1 Pain?
+
+			D D1 Treat common cold
+
+		Q Q2 Cough?
+
+			D D11 Time to party
+HELP NNNNNNN
+Q Q1 Pain?
+Q Q2 Cough?
+D D11 Time to party
+	*** Warning:  NULL returned from HELP
+* Finished
+
