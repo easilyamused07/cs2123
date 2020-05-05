@@ -1,0 +1,80 @@
+Node *searchLL(Node *p, int iMatch)
+{
+// What cases are handled by this first if?
+if (p == NULL)
+    return NULL;
+if(iMatch == p->element.key)
+	return p;
+	
+// Less than 
+if(iMatch < p->element.key)
+	return NULL;
+// recurse
+    return searchLL(p->pNext,iMatch);
+}
+
+int sumLL(Node *p)
+{
+    int iSum = 0;
+	if(p == NULL)
+		return 0; // empty list sum is zero
+	iSum = sumLL(p->pNext);
+	return iSum + p->element.data;
+
+}
+Node *insertLL(Node **pp, Element element)
+{
+	NodeLL *pNew;
+	//check for null pointer (i.e.,end of list or empty list)
+	if(*pp == NULL)
+	{
+		*pp = allocateNewNode(element);
+		return *pp;
+	}
+	else if (element.key < (*pp)->element.key)
+		pNew = allocateNewNode(element);
+		pNew->pNext = *pp;
+		*pp = pNew;
+		return pNew;
+	else if (element.key == (*pp)->element.key)
+		return *pp;
+	else
+		return insertLL(&((*pp)->pNext,element);
+}
+int countT(NodeT *p)
+{
+	int iCount = 0;
+	if(p == NULL)
+		return 0;
+	return 1 + countT(p->pLeft)+countT(p->pRight);
+
+}
+void printPreOrder(NodeT *p)
+{
+	if(p == NULL)
+		return;
+	printf("%d\n",p->element.key);
+	printPreOrder(p->pLeft);
+	printPreOrder(p->Right);
+}
+int sumTree(NodeT *p)
+{
+	if(p == NUL)
+		return 0;
+	return p->element.key + sumTree(p->pLeft) + sumTree(p->pRight);
+	
+}
+//count the number of vertices using depth first traversal
+
+int countG(Graph g, int v, int visitedM[])
+{
+	EdgeNode *e;
+	int iCount= 0;
+   	if(visitedM[v])
+		return 0;
+	visitedM[v] = TRUE;
+	iCount = 1;
+	for(e = g->vertexM[v].successorList; e !=NULL; e = e->pNextEdge)
+		iCount += countG(g,e->iVertex,vistedM);
+	return iCount;
+}

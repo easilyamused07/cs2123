@@ -1,0 +1,98 @@
+while(removeLL(simulation->eventList,&event))
+{
+   simulation->iClock = event.iTime;
+   switch(event.iEventType)
+   {
+       case EVT_ARRIVAL:
+	   arrival(simulation,event);
+	   break;
+       case EVT_ENTER_QUEUE1:	   
+	   queueUp(simulation,event,q1,server1);
+	   break;
+      case EVT_LEAVE_QUEUE1:
+	   removeQ(queue,&element);
+	   event.iEventType = EVT_SEIZE_SERVER1;
+	   insertOrderedLL(simulation->eventList,event);
+	   break;
+	  case EVT_SEIZE_SERVER1:
+	  seize(simulation,event,q1,server1);
+	  break;
+	  case EVT_SERVER1_COMPLETE:
+	  release(simulation,event);
+	  break;
+	  case EVT_ENTER_QUEUE2:
+	  queueUP(simulation,event,q2,server2);
+	  case EVT_LEAVE_QUEUE2:
+	  release(simulation,event,q2,server2);
+	  case EVT_SEIZE_SERVER2:
+	 seize(simulation,event,q2,server2);
+     case EVT_SERVER2_COMPLETE:
+	 leaveSystem(simulation,event);
+    
+   
+   }
+}
+arrival(Simulation simulation, Event event)
+{
+     simulation->iClock = event.iTime;
+	 event.iEventType = EVT_ENTER_QUEUE1;
+	 insertOrdredLL(simulation->eventList,event);
+     simulation->lWidgetCount++; 
+}
+queueUp(Simulation simulation Event event,Queue queue,Server server)
+{
+     QElement element;
+	 NodeQ *q;
+	 element.widget = event.widget;
+	 int bTrue = 0;
+	 element.iEnterQTime = simulation->iClock;
+	 insertQ(queue,element);
+	     queue->lQueueWaitSum += q->element.iEnterQTime;  // or the event.iTime?
+		 queue->lQueueWidgetTotalCount++;
+	 q = queue->pHead;
+	 q = q->pNext;
+	 iTargetID = q->element.widget.lWidgetNr;
+	 p = simulation->eventList->pHead;
+	 while(p != NULL && bTrue == 0)
+	 {
+	     if(p->event.iEventType == EVT_SERVER1_COMPLETE && p->event.widget.lWidgetNr == iTargetID)
+	        event.iTime = p->event.iTime;
+	        bTrue = 1;
+	     else
+	         p = p->pNext;
+	 }
+	 event.iEventType = EVT_SERVER1_COMPLETE;
+	 insertOrderedLL(simulation->eventList,event);
+}
+seize(Simulation simulation, Event event, Queue queue, Server server)
+{
+  NodeQ *q;
+  QElement element;
+  event.widget = server->widget;
+  if(server->bBusy = FALSE;
+  removeQ(queue,&element);
+   	 server->bBusy = TRUE;
+  int iLeaveQTime = simulation->iClock;  // ??? 	 
+  event.iEventType = EVT_SERVER1_COMPLETE;   
+  event.iTime = simulation->iClock + server->widget.iStep1tu; //??
+}
+release(Simulation simulation, Event event,Queue queue,Server sever)
+{
+    server->bBusy = FALSE;
+    seize(simulation,event,queue,server); //done with widget now the sever is available again
+	event.iTime = simulation->iClock;  //??
+	event.iEventType = EVT_ENTER_QUEUE2;
+}
+leaveSystem(Simulation simulation,Event event,Queue queue, Server server1)
+{
+    int iExitSystem = simulation->iClock;
+    //exittime-arrivaltime = time in system.
+}
+void printResults(Simulation simulation, Event event, Queue queue, Server server)
+{
+    if(server->bVerbose = TRUE)
+	    printf("Time\t Widget\t Event\n");
+		printf("%3d\t %3ld\t %s\n,event.iTime,event.widget. 
+
+
+}

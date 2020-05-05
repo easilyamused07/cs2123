@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1385316878 source:c:\users\carla\desktop\c\cs2123p1.c\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1422938791 source:c:\users\carla\desktop\c\cs2123p1.c\struct.c
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<stdlib.h>
+

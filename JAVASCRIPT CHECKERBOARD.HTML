@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<HTLM lang="en">
+<HEAD>
+	<meta charset="utf-8"/>
+	<title> My Checkerboard (2)</title>
+	<script>
+		document.write("<b>Checkerboard using Javascript</b></br></BR>Created by Carla Ramirez</br></br>");
+	</script>
+	
+</HEAD>
+	<BODY>
+	<CANVAS id="checkerboard" width="800" height="800" style="border:1px solid #000000">
+		
+	<script>
+		var canvas = document.getElementById("checkerboard"),
+		context = canvas.getContext("2d"), col =8, rows =8, swidth =100,sheight=100, x_coord=100,y_coord=100;				
+		for(i=0; i<rows;i++){
+			for(j=0;j<col;j++){
+				if((i+j) % 2 === 0){
+					context.fillStyle ='#000000'; 
+					context.fillRect(i*x_coord,j*y_coord,swidth,sheight);
+				}else{
+					context.fillStyle ='#FF0000';
+					context.fillRect(i*x_coord,j*y_coord,swidth,sheight);
+		 }
+	}
+}	
+	</script>
+</CANVAS>
+</BODY>
+</HTML>

@@ -1,0 +1,139 @@
+Binary Tree Functions
+_________________________________________________________________________________________________________________________
+Node *searchT(NodeT *p, char szID[])
+{
+    NodeT *temp;
+    if(p == NULL)
+	    return NULL;
+	if(strcmp(szID,p->element.szID) == 0 )
+	    return p;
+	temp = searchT(p->pLeft,szID);
+	if(temp != NULL)
+	    return temp;
+	else
+	temp = searchT(p->pRight,szID);
+		return temp;
+	
+}
+NodeT *insertNodeT(NodeT *p, Element value, char szParentId[], char cYN)
+{
+    NodeT *temp;
+	NodeT *pNew = allocateNodeT(value);
+	temp = searchT(p,szParentId);
+	if(temp == NULL)
+	{
+	   printf("Warning parent not found!\n);
+	   return NULL;
+	}
+    else if (pNew->pRight == NULL && cYN == 'Y')
+		temp->pRight = pNew;
+	else if (pNew->pLeft == NULL && cYN == 'N')
+		temp->pLeft = pNew;
+	else
+		printf("Warning parent already exists!\n");
+	return NULL;
+	
+	return pNew;
+}
+char *help(NodeT *p, char szAnswers[], int iAns, TextList textList)
+{
+    if(p == NULL)
+		return NULL;
+	if(szAnswers[iAns] == 'Y')
+	{
+		printf("%c %s %s \n",p->element.cNodeType,p->elemtn.szID,getText(textList,p->element.szID);
+		help(p->pRight,szAnswers,iAns + 1,textList);
+	}	
+	else if (szAnswers[iAns] == 'N')
+	{
+		printf("%c %s %s \n",p->element.cNodeType,p->elemtn.szID,getText(textList,p->element.szID);
+		help(p->pLeft,szAnswers,iAns + 1, textList);
+	}
+}	
+_________________________________________________________________________________________________________________________		
+Graph Functions
+
+void computePertTEandTL(Graph graph)
+{
+    int i;
+    
+    for(i=0; i < iNumVertices; i++)
+	{
+	   if(graph->vertexM[i].successorList == NULL)
+		    computePertMaxFromSink(graph,i,0);
+	   if(graph->vertexM[i].predeccesorList == NULL)
+		    computePertTE(graph,i,0);
+	}
+	computePertTL(graph);
+}
+void computePertTE(Graph graph, int iHead, int iCurrentTE)
+{
+    EdgeNode *e;
+	
+	if(graph->vertexM[iHead].iMaxFromSource < iCurrentTE)
+	    graph->vertexM[iHead].iMaxFromSource = iCurrentTE;
+	for(e = graph->vertexM[iHead].successorList; e != NULL; e = e->pNextEdge)
+	{
+	    computePertTE(graph,e->edge.iVetex,e->edge.iPath + graph->vertexM[iHead].iMaxFromSink);
+	}
+}
+void computePertMaxFromSink(Graph graph, int iLast, int iCurrentTL)
+{
+    EdgeNode *e;
+	
+	if(graph->vertexM[iLast].iMaxFromSink < iCurrentTL)
+		graph->vertexM[iLast].iMaxFromSink = iCurrentTL;
+	for(e = graph->verteM[iLast].predeccesorList; e != NULL; e = e->pNextEdge)
+	{
+	    computePertMaxFromSink(graph,e->edge.iVetex; e->edge.iPath + graph->vertexM[iLast].iMaxFromSink);	
+	}
+}
+void computePertTl(Graph graph)
+{
+   int i;
+   int iMaxTE
+   for(i = 0; i < iNumVertices; i++)
+   {
+       if(graph->vertexM[i].iMaxFromSource > iMaxTE)
+       iMaxTE = graph->vertexM[i].iMaxFromSource;
+   }
+   for(i = 0; i < iNumVertices; i++)
+   {
+       graph->vertexM[i].iTL = iMaxTE - graph->vertexM[i].iMaxFromSink;   
+   }
+}
+void printCriticalPaths(Graph graph)
+{
+   int i;
+   int iPathLength = 0;
+   for(i = 0; i < g->iNumVertices; i++)
+   {
+       if(graph->vertexM[i].predeccesorList == NULL)
+	        printCriticalPaths(graph,malloc(g->iNumVertices),iPathLength,i);
+	
+   }
+}
+void printCriticalPathsHelper(Graph graph, char *szPath, int iPathLength, int iCurrent)
+{
+    int i;
+	EdgeNode *e;
+    
+    if(graph->vertexM[iCurrent].iMaxFromSource == graph->vertexM[iCurent].iMaxFromSink)
+		szPath[iPathLength] = graph->vertexM[iCurent].cLabel;
+
+    for(e = graph->vertexM[iCurent].successorList; e != NULL; e = e->pNextEdge)
+    {
+        printCriticalPathsHelper(graph,(char*)memcpy(malloc(graph->iNumVertices),szPath,graph->iNumVertices),iPathLength + 1; e->edge.iVertex);
+    }	
+	if(graph->vertexM[iCurrent].successorList == NULL)
+		for(i = 0; i < iPathLength; i++)
+		{
+		     printf("%c\n",graph->vertexM[iCurent].cLabel);
+        }
+	else
+    {	
+		free(szPath);
+		return;
+	}	
+}   
+
